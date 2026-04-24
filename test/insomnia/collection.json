@@ -1,0 +1,314 @@
+{
+  "info": {
+    "_postman_id": "012b611f-78e9-4a17-92ce-b8e32958dab4",
+    "name": "shopping list",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48469681",
+    "_collection_link": "https://go.postman.co/collection/48469681-012b611f-78e9-4a17-92ce-b8e32958dab4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "shoppingList/delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbf0f466d1338a890079c",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbf0f466d1338a890079c"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingList/update",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Seznam na dovolenou\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbfb7ebba716c0f6c29d6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbfb7ebba716c0f6c29d6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingListItem/delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Seznam na dovolenou\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbfb7ebba716c0f6c29d6/items/69ebc92eebba716c0f6c29d9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbfb7ebba716c0f6c29d6",
+            "items",
+            "69ebc92eebba716c0f6c29d9"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingListItem/resolve",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Seznam na dovolenou\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbfb7ebba716c0f6c29d6/items/69ebca57ebba716c0f6c29da/resolve",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbfb7ebba716c0f6c29d6",
+            "items",
+            "69ebca57ebba716c0f6c29da",
+            "resolve"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingListItem/create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Mýdlo\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbfb7ebba716c0f6c29d6/items",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbfb7ebba716c0f6c29d6",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingListItem/update",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Mýdlo tekuté\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbfb7ebba716c0f6c29d6/items/69ebc92eebba716c0f6c29d9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbfb7ebba716c0f6c29d6",
+            "items",
+            "69ebc92eebba716c0f6c29d9"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingList/create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"name\": \"Seznam na dovolenou\" }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/lists",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingList/list",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/lists",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shoppingList/get",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-user-id",
+            "value": "u1",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/lists/69ebbfb7ebba716c0f6c29d6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "lists",
+            "69ebbfb7ebba716c0f6c29d6"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

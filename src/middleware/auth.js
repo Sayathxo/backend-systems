@@ -1,33 +1,9 @@
+const { ObjectId } = require("mongodb");
+
 const USERS = [
   { id: "u1", name: "Petr Novák" },
   { id: "u2", name: "Anna Nováková" },
   { id: "u3", name: "Mike Novák" },
-];
-
-const SHOPPING_LISTS = [
-  {
-    id: "list1",
-    name: "Seznam na party",
-    ownerId: "u1",
-    archived: false,
-    members: [
-      { id: "u1", name: "Petr Novák" },
-      { id: "u2", name: "Anna Nováková" },
-      { id: "u3", name: "Mike Novák" },
-    ],
-    items: [],
-  },
-  {
-    id: "list2",
-    name: "Nákup na dovolenou",
-    ownerId: "u2",
-    archived: false,
-    members: [
-      { id: "u1", name: "Petr Novák" },
-      { id: "u2", name: "Anna Nováková" },
-    ],
-    items: [],
-  },
 ];
 
 function authenticatedUser(req, res, next) {
@@ -39,40 +15,49 @@ function authenticatedUser(req, res, next) {
   }
 
   req.user = user;
-  req.db = { users: USERS, lists: SHOPPING_LISTS };
   next();
 }
 
-function isMember(req, res, next) {
+async function isMember(req, res, next) {
   const listId = req.params.listId || req.body.listId;
-  const list = req.db.lists.find((l) => l.id === listId);
+  try {
+    const collection = req.app.locals.db.collection("shoppingLists");
+    const list = await collection.findOne({ _id: new ObjectId(listId) });
 
-  if (!list) {
-    return res.status(404).json({ error: "Seznam nenalezen" });
+    if (!list) {
+      return res.status(404).json({ error: "Seznam nenalezen" });
+    }
+
+    if (!list.members.some((m) => m.id === req.user.id)) {
+      return res.status(403).json({ error: "Forbidden - nejsi členem tohoto seznamu" });
+    }
+
+    req.list = { ...list, id: list._id.toString() };
+    next();
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
-
-  if (!list.members.some((m) => m.id === req.user.id)) {
-    return res.status(403).json({ error: "Forbidden - nejsi členem tohoto seznamu" });
-  }
-
-  req.list = list;
-  next();
 }
 
-function isOwner(req, res, next) {
+async function isOwner(req, res, next) {
   const listId = req.params.listId || req.body.id;
-  const list = req.db.lists.find((l) => l.id === listId);
+  try {
+    const collection = req.app.locals.db.collection("shoppingLists");
+    const list = await collection.findOne({ _id: new ObjectId(listId) });
 
-  if (!list) {
-    return res.status(404).json({ error: "Seznam nenalezen" });
+    if (!list) {
+      return res.status(404).json({ error: "Seznam nenalezen" });
+    }
+
+    if (list.ownerId !== req.user.id) {
+      return res.status(403).json({ error: "Forbidden - nejsi vlastníkem tohoto seznamu" });
+    }
+
+    req.list = { ...list, id: list._id.toString() };
+    next();
+  } catch (e) {
+    res.status(500).json({ error: e.message });
   }
-
-  if (list.ownerId !== req.user.id) {
-    return res.status(403).json({ error: "Forbidden - nejsi vlastníkem tohoto seznamu" });
-  }
-
-  req.list = list;
-  next();
 }
 
 module.exports = { authenticatedUser, isMember, isOwner };
